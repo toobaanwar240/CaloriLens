@@ -1,0 +1,32 @@
+# --- Core AI Libraries ---
+torch
+torchvision
+torchaudio
+
+# --- YOLOv8 Segmentation ---
+ultralytics
+
+# --- SAM (Segment Anything) ---
+segment-anything
+opencv-python
+numpy
+
+# --- Image Processing ---
+Pillow
+scikit-image
+
+# --- Classification Models ---
+timm
+
+# --- USDA API / Requests ---
+requests
+
+# --- LLM (Groq) ---
+groq
+
+# --- Streamlit UI ---
+streamlit
+
+# --- Others / Utilities ---
+matplotlib
+psutil
