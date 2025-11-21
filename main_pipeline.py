@@ -4,11 +4,11 @@ import cv2
 from groq import Groq
 
 # --- MODULE IMPORTS ---
-from image_input import load_image
+from image_input import read_image
 from backend.segmentation import SegmentationModel
-from backend.classification.classifier import FoodClassifier
+from backend.classification.classifier import ConvNeXtClassifier
 from backend.portion_estimator.estimator import PortionSizeEstimator
-from backend.nutrition_api.usda_client import USDAClient
+from backend.nutrition_api.usda_client import USDANutritionClient
 from backend.llm_nutrition_agent.agent import NutritionLLMAgent
 
 
@@ -24,7 +24,7 @@ seg_model = SegmentationModel(
 )
 
 # Classification (ConvNeXt)
-classifier = FoodClassifier(model_path="convnext-food.pt")
+classifier = ConvNeXtClassifier(model_path="convnext-food.pt")
 
 # Portion Estimation
 portion = PortionSizeEstimator(
@@ -33,7 +33,7 @@ portion = PortionSizeEstimator(
 )
 
 # USDA API
-usda = USDAClient(api_key="USDA_API_KEY_HERE")
+usda = USDANutritionClient(api_key="USDA_API_KEY_HERE")
 
 # Groq
 groq_client = Groq(api_key="GROQ_API_KEY_HERE")
@@ -45,7 +45,7 @@ llm = NutritionLLMAgent(groq_client)
 # -------------------------------------------------------------
 def analyze_food(image_path: str):
     print("🔹 Loading image...")
-    img = load_image(image_path)
+    img = read_image(image_path)
 
     # --- SEGMENTATION ---
     print("🔹 Segmenting food...")
@@ -62,11 +62,13 @@ def analyze_food(image_path: str):
 
     # --- CLASSIFICATION ---
     print("🔹 Classifying food...")
-    food_name, confidence = classifier.classify(crop)
+    cls = classifier.predict(crop)
+    food_name = cls["label"]
+    confidence = cls["confidence"]
 
     # --- PORTION SIZE ---
     print("🔹 Estimating portion size...")
-    grams = portion.estimate_portion(mask=masks[0])
+    grams = portion.estimate(mask=masks[0])
 
     # --- USDA NUTRITION LOOKUP ---
     print("🔹 Fetching nutrition from USDA...")
