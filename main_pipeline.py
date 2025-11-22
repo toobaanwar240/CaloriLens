@@ -2,11 +2,12 @@
 
 import cv2
 from groq import Groq
+from huggingface_hub import hf_hub_download
 
 # --- MODULE IMPORTS ---
+from backend.classification.classifier import SmartEnsembleClassifier
 from image_input import read_image
 from backend.segmentation import SegmentationModel
-from backend.classification.classifier import ConvNeXtClassifier
 from backend.portion_estimator.estimator import PortionSizeEstimator
 from backend.nutrition_api.usda_client import USDANutritionClient
 from backend.llm_nutrition_agent.agent import NutritionLLMAgent
@@ -24,13 +25,23 @@ seg_model = SegmentationModel(
 )
 
 # Classification (ConvNeXt)
-classifier = ConvNeXtClassifier(model_path="convnext-food.pt")
+model1_path = hf_hub_download(
+    repo_id="Tooba240/calorielens-food-classifier",
+    filename="food_classifier_finetuned (1).pth"
+)
+model2_path = hf_hub_download(
+    repo_id="Tooba240/calorielens-food-classifier",
+    filename="food_classifier_finetuned (3).pth"
+)
+# Initialize
+classifier = SmartEnsembleClassifier(
+    model1_weights=model1_path,
+    model2_weights=model2_path
+)
+
 
 # Portion Estimation
-portion = PortionSizeEstimator(
-    reference_object="credit_card",  # or "coin"
-    reference_width_cm=8.5           # credit card width
-)
+estimator = PortionSizeEstimator(pixel_to_cm_ratio=0.026)
 
 # USDA API
 usda = USDANutritionClient(api_key="USDA_API_KEY_HERE")
