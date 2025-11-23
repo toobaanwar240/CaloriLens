@@ -288,6 +288,64 @@ if models is None:
 # HEADER
 # ------------------------------
 
+st.markdown("<br>", unsafe_allow_html=True)
+
+# Food Classes Section
+with st.expander("🍕 **View All 50 Detectable Food Classes**", expanded=False):
+    st.markdown("""
+    <div style='background: rgba(37, 99, 235, 0.05); padding: 1.5rem; border-radius: 12px; 
+                border: 1px solid rgba(37, 99, 235, 0.2); margin-bottom: 1.5rem;'>
+        <p style='color: #94A3B8; margin: 0; font-size: 0.95rem;'>
+            Our AI model can accurately detect and analyze the following 50 food categories with 85%+ accuracy:
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Your 50 food classes
+    food_classes = [
+        "Apple Pie", "Baby Back Ribs", "Baklava", "Beef Tartare", 
+        "Beet Salad", "Beignets", "Bread Pudding", "Breakfast Burrito",
+        "Bruschetta", "Cannoli", "Caprese Salad", "Carrot Cake", "Ceviche",
+        "Cheese Plate", "Cheesecake", "Chicken Curry", "Chicken Quesadilla",
+        "Chicken Wings", "Chocolate Cake", "Chocolate Mousse", "Clam Chowder",
+        "Club Sandwich", "Crab Cakes", "Creme Brulee", "Croque Madame",
+        "Cupcakes", "Deviled Eggs", "Donuts", "Dumplings", "Edamame",
+        "Eggs Benedict", "Falafel", "Fried Calamari", "Fried Rice",
+        "Frozen Yogurt", "Garlic Bread", "Gnocchi", "Greek Salad",
+        "Grilled Cheese Sandwich", "Grilled Salmon", "Guacamole",
+        "Gyoza", "Hummus", "Pizza", "Ramen", "Samosa", "Steak", "Sushi"
+    ]
+    
+    # Sort alphabetically
+    food_classes.sort()
+    
+    # Display in 4 columns for better readability
+    cols = st.columns(4)
+    for idx, food in enumerate(food_classes):
+        col_idx = idx % 4
+        with cols[col_idx]:
+            st.markdown(f"""
+            <div style='background: rgba(255, 255, 255, 0.02); 
+                        padding: 0.7rem 1rem; 
+                        border-radius: 8px; 
+                        margin: 0.4rem 0;
+                        border-left: 3px solid #2563EB;
+                        transition: all 0.2s ease;'>
+                <span style='color: #F1F5F9; font-size: 0.9rem;'>• {food}</span>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("""
+    <div style='background: rgba(16, 185, 129, 0.08); padding: 1rem; border-radius: 8px; 
+                border-left: 4px solid #10B981; margin-top: 1rem;'>
+        <p style='margin: 0; color: #10B981; font-size: 0.9rem;'>
+            💡 <strong>Tip:</strong> For best results, upload clear, well-lit photos with the food item prominently visible.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("<h1 class='title'>🍽️ CaloriLens AI</h1>", unsafe_allow_html=True)
 st.markdown(
     "<p style='text-align: center; color: #94A3B8; font-size: 1.1rem; "
