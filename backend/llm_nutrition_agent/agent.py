@@ -1,28 +1,16 @@
 # llm_nutrition_agent/agent.py
-#install groq 
-#get groq key
+
 import json
 from typing import Dict, Any
 
 
 class NutritionLLMAgent:
-    """
-    LLM Nutrition Agent using GROQ for extremely fast analysis.
-    """
 
-    def __init__(self, groq_client, model: str = "llama3-70b-8192"):
-        """
-        groq_client: Groq client instance
-        model: Llama3 / Mixtral / Gemma (Groq models)
-        """
+    def __init__(self, groq_client, model: str = "llama3-70b-versatile"):
         self.client = groq_client
         self.model = model
 
-    # ----------------------------------------------------------
-    # PROMPT BUILDING
-    # ----------------------------------------------------------
     def _build_prompt(self, nutrition: Dict[str, Any]) -> str:
-
         food = nutrition["food_name"]
         grams = nutrition["grams"]
         cal = nutrition["calories"]
@@ -57,9 +45,30 @@ Your tasks:
   ]
 }}
 """
-    # ----------------------------------------------------------
-    # MAIN ANALYSIS FUNCTION (Groq)
-    # ----------------------------------------------------------
+
+    def _parse_json_safely(self, text: str) -> Dict[str, Any]:
+        try:
+            return json.loads(text)
+        except:
+            pass
+
+        try:
+            start = text.index("{")
+            end = text.rindex("}") + 1
+            return json.loads(text[start:end])
+        except:
+            pass
+
+        return {
+            "score": 50,
+            "summary": "The AI could not parse nutrition correctly.",
+            "recommendations": [
+                "Try scanning the food again.",
+                "Ensure USDA lookup succeeded.",
+                "Double-check the portion size."
+            ]
+        }
+
     def analyze_meal(self, nutrition: Dict[str, Any]) -> Dict:
 
         prompt = self._build_prompt(nutrition)
@@ -73,21 +82,5 @@ Your tasks:
             temperature=0.3,
         )
 
-        text = response.choices[0].message["content"]
-
-        # Try parsing JSON
-        try:
-            result = json.loads(text)
-        except json.JSONDecodeError:
-            print("⚠ Groq returned non-JSON output, returning fallback.")
-            result = {
-                "score": 50,
-                "summary": "The AI could not parse nutrition correctly.",
-                "recommendations": [
-                    "Try scanning the food again.",
-                    "Make sure the segmentation was accurate.",
-                    "Ensure food name matches USDA database."
-                ]
-            }
-
-        return result
+        text = response.choices[0].message.content
+        return self._parse_json_safely(text)
