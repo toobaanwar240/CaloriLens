@@ -657,7 +657,7 @@ else:
         st.markdown("""
         <div style='text-align: center; padding: 1.5rem; background: rgba(16, 185, 129, 0.05); 
                     border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.2);'>
-            <h2 style='color: #10B981; margin: 0; font-weight: 700;'>95%</h2>
+            <h2 style='color: #10B981; margin: 0; font-weight: 700;'>85%</h2>
             <p style='color: #94A3B8; margin: 0.5rem 0 0 0;'>Accuracy</p>
         </div>
         """, unsafe_allow_html=True)
