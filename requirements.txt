@@ -1,56 +1,39 @@
-# --- Core AI Libraries ---
+# PyTorch
 torch
 torchvision
 torchaudio
 
-# --- YOLOv8 Segmentation ---
+# YOLOv8 Segmentation
 ultralytics
 
-# --- SAM (Segment Anything) ---
+# SAM (Segment Anything)
 segment-anything
 
-# --- Image Processing (IMPORTANT: Use headless version for Streamlit Cloud) ---
+# Image Processing (headless version for cloud)
 opencv-python-headless
 numpy
 Pillow
 scikit-image
 
-# --- Classification Models ---
+# Classification Models
 timm
 
-# --- USDA API / Requests ---
+# USDA API / Requests
 requests
 
-# --- LLM (Groq) ---
+# LLM (Groq)
 groq
 
-# --- Environment Variables ---
+# Environment Variables
 python-dotenv
 
-# --- Streamlit UI ---
+# Streamlit UI
 streamlit
 
-# --- HuggingFace Hub ---
+# HuggingFace Hub
 huggingface-hub
 
-# --- Others / Utilities ---
+# Others / Utilities
 matplotlib
 psutil
-```
 
-## **Key Changes:**
-
-1. ✅ **Replace `opencv-python` with `opencv-python-headless`** - This is the critical fix! The headless version works on cloud environments without GUI dependencies.
-
-2. ✅ **Added `python-dotenv`** - Your app uses `load_dotenv()` for API keys
-
-3. ✅ **Added `huggingface-hub`** - Your app uses `hf_hub_download()` to download models
-
-## **Additional Recommendations:**
-
-If you still face issues, you might also want to add a `packages.txt` file in your repo root with system dependencies:
-
-**packages.txt:**
-```
-libgl1-mesa-glx
-libglib2.0-0
