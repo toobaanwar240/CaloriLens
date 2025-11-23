@@ -291,7 +291,7 @@ if models is None:
 st.markdown("<br>", unsafe_allow_html=True)
 
 # Food Classes Section
-with st.expander("🍕 **View All 50 Detectable Food Classes**", expanded=False):
+with st.expander("🍕 **View All 50+ Detectable Food Classes**", expanded=False):
     st.markdown("""
     <div style='background: rgba(37, 99, 235, 0.05); padding: 1.5rem; border-radius: 12px; 
                 border: 1px solid rgba(37, 99, 235, 0.2); margin-bottom: 1.5rem;'>
