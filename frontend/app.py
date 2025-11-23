@@ -77,9 +77,13 @@ def load_models():
         
         # 1. Segmentation Model (20%)
         status_text.text("🔄 Loading segmentation model...")
+        model_path = hf_hub_download(
+        repo_id="Tooba240/yolo_models",
+        filename="yolov8m-seg.pt"
+        )
         seg_model = SegmentationModel(
             model_type="yolo",
-            model_path="yolov8m-seg.pt"
+            model_path=model_path
         )
         progress_bar.progress(20)
         
