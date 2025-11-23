@@ -1,1 +1,1 @@
-from segmentation import SegmentationModel
+from backend.segmentation.segmentator import SegmentationModel

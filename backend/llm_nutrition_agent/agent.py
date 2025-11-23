@@ -6,7 +6,7 @@ from typing import Dict, Any
 
 class NutritionLLMAgent:
 
-    def __init__(self, groq_client, model: str = "llama3-70b-versatile"):
+    def __init__(self, groq_client, model: str = "llama-3.1-8b-instant"):
         self.client = groq_client
         self.model = model
 

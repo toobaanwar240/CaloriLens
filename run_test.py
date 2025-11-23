@@ -1,5 +1,5 @@
 import os
-from CaloriLens.backend.pipeline.nutrition_pipeline import NutritionPipeline
+from backend.pipeline.nutrition_pipeline import NutritionPipeline
 
 # Ensure keys are loaded
 from dotenv import load_dotenv

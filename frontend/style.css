@@ -1,0 +1,484 @@
+/* ============================================
+   MODERN NEUTRAL FOOD ANALYZER UI
+   ============================================ */
+/* ============================================
+   ULTRA NEUTRAL MODERN UI WITH ANIMATED LOADER
+   ============================================ */
+
+/* === ROOT VARIABLES - ULTRA NEUTRAL PALETTE === */
+:root {
+    --primary-color: #2563EB;        /* Clean blue */
+    --secondary-color: #059669;      /* Muted emerald */
+    --accent-color: #DC2626;         /* Subtle red */
+    --dark-bg: #0A0A0F;              /* Almost black */
+    --card-bg: #18181B;              /* Dark zinc */
+    --card-hover: #27272A;           /* Zinc gray */
+    --text-light: #FAFAFA;           /* Pure white-ish */
+    --text-dim: #A1A1AA;             /* Neutral gray */
+    --success-color: #10B981;        /* Success green */
+    --warning-color: #F59E0B;        /* Warning amber */
+    --error-color: #EF4444;          /* Error red */
+    --border-color: rgba(255, 255, 255, 0.06);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+    --shadow-xl: 0 20px 25px rgba(0,0,0,0.6);
+}
+
+/* === GLOBAL STYLES === */
+.stApp {
+    background: #0A0A0F;
+    color: var(--text-light);
+}
+
+/* === ANIMATIONS === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.02);
+        opacity: 0.9;
+    }
+}
+
+/* === CUSTOM ANIMATED LOADER === */
+@keyframes eating {
+    0% {
+        transform: translateX(0) scale(1);
+    }
+    25% {
+        transform: translateX(30px) scale(1.1);
+    }
+    50% {
+        transform: translateX(60px) scale(1);
+    }
+    75% {
+        transform: translateX(30px) scale(0.9);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes foodMove {
+    0%, 100% {
+        transform: translateX(0) rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-20px) rotate(-15deg);
+        opacity: 0.5;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes progressBar {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* === TITLE === */
+.title {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #FAFAFA, #A1A1AA, #FAFAFA);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 0.8s ease;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+/* === FEATURE CARDS === */
+.feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+    background: var(--card-hover);
+}
+
+.feature-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* === UPLOAD ZONE === */
+.upload-zone {
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.02);
+    margin: 3rem 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation: fadeInUp 0.8s ease;
+}
+
+.upload-zone:hover {
+    border-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.1);
+}
+
+.upload-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+/* === FILE UPLOADER === */
+[data-testid="stFileUploader"] {
+    background: transparent !important;
+    border: none !important;
+}
+
+[data-testid="stFileUploader"] > div {
+    background: transparent !important;
+}
+
+/* === BUTTONS === */
+.stButton > button {
+    background: var(--primary-color) !important;
+    color: white !important;
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    padding: 0.875rem 2.5rem !important;
+    border: none !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
+    width: 100% !important;
+    min-height: 3rem !important;
+}
+
+.stButton {
+    text-align: center !important;
+}
+
+.stButton > button:hover {
+    background: #1D4ED8 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0px) !important;
+}
+
+/* === IMAGES === */
+[data-testid="stImage"] {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    animation: fadeInUp 0.6s ease;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+[data-testid="stImage"]:hover {
+    transform: scale(1.01);
+}
+
+/* === SUBHEADERS === */
+.stApp h2, .stApp h3 {
+    color: var(--text-light);
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.6s ease;
+}
+
+/* === TEXT CONTENT === */
+.stMarkdown p, .stMarkdown li {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* === COLUMNS === */
+.stColumn {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease;
+}
+
+.stColumn:hover {
+    background: var(--card-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* === CUSTOM ANIMATED SPINNER === */
+.stSpinner > div {
+    display: none !important; /* Hide default spinner */
+}
+
+/* Custom spinner container */
+.stSpinner {
+    position: relative;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Animated character spinner */
+.stSpinner::before {
+    content: '🤖';
+    font-size: 3rem;
+    animation: eating 2s ease-in-out infinite;
+    display: block;
+}
+
+.stSpinner::after {
+    content: '🍕';
+    font-size: 2rem;
+    position: absolute;
+    left: 55%;
+    animation: foodMove 2s ease-in-out infinite;
+    display: block;
+}
+
+/* Progress bar */
+.stProgress > div > div {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)) !important;
+    animation: progressBar 2s ease-in-out;
+}
+
+/* === SUCCESS/INFO MESSAGES === */
+.stSuccess {
+    background: rgba(16, 185, 129, 0.08) !important;
+    border-left: 3px solid var(--success-color) !important;
+    border-radius: 10px;
+    padding: 1rem;
+    animation: fadeInUp 0.5s ease;
+    color: var(--text-light) !important;
+}
+
+.stInfo {
+    background: rgba(37, 99, 235, 0.08) !important;
+    border-left: 3px solid var(--primary-color) !important;
+    border-radius: 10px;
+    padding: 1rem;
+    animation: fadeInUp 0.5s ease;
+    color: var(--text-light) !important;
+}
+
+.stWarning {
+    background: rgba(245, 158, 11, 0.08) !important;
+    border-left: 3px solid var(--warning-color) !important;
+    border-radius: 10px;
+    padding: 1rem;
+    color: var(--text-light) !important;
+}
+
+.stError {
+    background: rgba(239, 68, 68, 0.08) !important;
+    border-left: 3px solid var(--error-color) !important;
+    border-radius: 10px;
+    padding: 1rem;
+    color: var(--text-light) !important;
+}
+
+/* === METRICS === */
+.stMetric {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.stMetric:hover {
+    background: var(--card-hover);
+    transform: scale(1.02);
+    box-shadow: var(--shadow-sm);
+}
+
+/* === RECOMMENDATIONS LIST === */
+.stMarkdown ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.stMarkdown li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.stMarkdown li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.stMarkdown li:hover {
+    transform: translateX(6px);
+    color: var(--primary-color);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .feature-card {
+        margin-bottom: 1rem;
+    }
+    
+    .upload-zone {
+        padding: 2rem 1rem;
+    }
+    
+    .stButton > button {
+        font-size: 1rem !important;
+        padding: 0.75rem 2rem !important;
+    }
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--card-hover);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* === NUTRITION CARDS === */
+.nutrition-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease;
+}
+
+.nutrition-card:hover {
+    background: var(--card-hover);
+    transform: translateX(4px);
+    border-color: var(--primary-color);
+}
+
+/* === EXPANDER === */
+.streamlit-expanderHeader {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important;
+    color: var(--text-light) !important;
+}
+
+.streamlit-expanderHeader:hover {
+    background: var(--card-hover) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* === LOADING ANIMATION CONTAINER === */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.loading-emoji {
+    font-size: 4rem;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.loading-text {
+    color: var(--text-dim);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* === SIDEBAR === */
+.css-1d391kg {
+    background: var(--dark-bg) !important;
+}
+
+[data-testid="stSidebar"] {
+    background: var(--dark-bg) !important;
+    border-right: 1px solid var(--border-color) !important;
+}

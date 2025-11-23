@@ -1,8 +1,8 @@
 import os
 from groq import Groq
 
-from CaloriLens.backend.nutrition_api.usda_client import USDANutritionClient
-from CaloriLens.backend.llm_nutrition_agent.agent import NutritionLLMAgent
+from backend.nutrition_api.usda_client import USDANutritionClient
+from backend.llm_nutrition_agent.agent import NutritionLLMAgent
 
 
 class NutritionPipeline:
